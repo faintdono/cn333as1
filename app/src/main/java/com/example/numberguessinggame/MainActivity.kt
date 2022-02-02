@@ -1,5 +1,6 @@
 package com.example.numberguessinggame
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
@@ -13,8 +14,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var imageButtonReset: ImageButton
     lateinit var imageButtonCheck: ImageButton
 
-    var rand: Int = nextInt(1, 100)
-    var count: Int = 0
+    private var rand: Int = nextInt(1, 1000)
+    private var count: Int = 0
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         imageButtonReset = findViewById(R.id.imageButtonReset)
         imageButtonCheck = findViewById(R.id.imageButtonCheck)
 
-        textView.text = "Please enter your guess:"
+        textView.text = "Try to guess the number that I'm think (1-1000)"
 
         imageButtonCheck.setOnClickListener {
 
@@ -32,27 +34,33 @@ class MainActivity : AppCompatActivity() {
 
             if (n < rand) {
 
-                textView.text = "Wrong, your number is to low!"
-                count++
+                textView.text = "Wrong, your number is too low!"
                 editText.text.clear()
+                count++
+
             } else if (n > rand) {
 
-                textView.text = "Wrong, your number is to high!"
+                textView.text = "Wrong, your number is too high!"
                 editText.text.clear()
                 count++
+
             } else {
 
-                textView.text = "Congrat, your're right! \n" +
+                textView.text = "Yeah that's it !\n" +
                         "Your Guess Count: $count"
                 editText.text.clear()
+
             }
         }
+
+
         imageButtonReset.setOnClickListener {
             resetGame()
         }
     }
-    fun resetGame() {
-        rand = nextInt(1,100)
+
+    private fun resetGame() {
+        rand = nextInt(1, 100)
         textView.text = "Please enter your guess:"
         editText.text.clear()
 
