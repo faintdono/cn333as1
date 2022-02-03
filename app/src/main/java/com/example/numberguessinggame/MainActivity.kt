@@ -6,10 +6,12 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import kotlin.random.Random.Default.nextInt
 
 class MainActivity : AppCompatActivity() {
     lateinit var textView: TextView
+    lateinit var textView2: TextView
     lateinit var editText: EditText
     lateinit var imageButtonReset: ImageButton
     lateinit var imageButtonCheck: ImageButton
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         textView = findViewById(R.id.textView)
+        textView2 = findViewById(R.id.textView2)
         editText = findViewById(R.id.editText)
         imageButtonReset = findViewById(R.id.imageButtonReset)
         imageButtonCheck = findViewById(R.id.imageButtonCheck)
@@ -33,19 +36,19 @@ class MainActivity : AppCompatActivity() {
             val n: Int = editText.text.toString().toInt()
 
             if (n < rand) {
-
-                textView.text = "Wrong, your number is too low!"
+                textView2.isVisible = true
+                textView2.text = "Hints: your number is too low!"
                 editText.text.clear()
                 count++
 
             } else if (n > rand) {
-
-                textView.text = "Wrong, your number is too high!"
+                textView2.isVisible = true
+                textView2.text = "Hints: your number is too high!"
                 editText.text.clear()
                 count++
 
             } else {
-
+                textView2.isVisible = false
                 textView.text = "Yeah that's it !\n" +
                         "Your Guess Count: $count"
                 editText.text.clear()
@@ -62,6 +65,7 @@ class MainActivity : AppCompatActivity() {
     private fun resetGame() {
         rand = nextInt(1, 1000)
         textView.text = "Try to guess the number that I'm think (1-1000)"
+        textView2.isVisible = false
         editText.text.clear()
 
     }
