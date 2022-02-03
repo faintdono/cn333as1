@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetGame() {
         rand = nextInt(1, 1000)
-        textView.text = "Please enter your guess:"
+        textView.text = "Try to guess the number that I'm think (1-1000)"
         editText.text.clear()
 
     }
